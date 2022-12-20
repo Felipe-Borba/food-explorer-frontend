@@ -11,7 +11,7 @@ export function MainLayout(props: Props) {
   const { children } = props;
 
   return (
-    <Flex flexDir="column" h="100vh" justifyContent={"space-between"}>
+    <Flex flexDir="column" h="100vh" justifyContent="space-between">
       <Flex flexDir="column">
         <Header />
 

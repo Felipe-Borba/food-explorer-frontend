@@ -20,7 +20,7 @@ export function Header() {
       <Link to="/home">
         <HStack spacing="12px">
           <IconMain boxSize="29.2px" />
-          <Heading>food explorer</Heading>
+          <Heading fontSize="25px">food explorer</Heading>
         </HStack>
       </Link>
 
