@@ -1,5 +1,4 @@
 import React from "react";
-import mainIcon from "../../../assets/main-icon.svg";
 import {
   FormControl,
   Grid,
@@ -9,6 +8,7 @@ import {
   Image,
   VStack,
 } from "@chakra-ui/react";
+import { IconMain } from "../../icons/IconMain";
 
 interface Props {
   sectionText: string;
@@ -35,7 +35,7 @@ export default function SigInLayout(props: Props) {
     >
       <GridItem alignSelf={"center"} area={"logo"}>
         <HStack spacing="20px" mb="100px">
-          <Image src={mainIcon} alt="Logo do app" />
+          <IconMain w="49.43px" h="47.5px" />
           <Heading fontSize="43px">food explorer</Heading>
         </HStack>
       </GridItem>

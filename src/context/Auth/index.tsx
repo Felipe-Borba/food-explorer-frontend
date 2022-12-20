@@ -18,7 +18,14 @@ export function useAuth() {
 
 export function AuthProvider({ children }: PropsWithChildren) {
   const [data, setData] = useState<AuthData>({
-    user: null,
+    user: {
+      id: 1,
+      name: "felipe",
+      created_at: "01091995",
+      email: "na",
+      password: "123",
+      updated_at: "12312",
+    },
   });
 
   async function logIn(props: LogInProps) {

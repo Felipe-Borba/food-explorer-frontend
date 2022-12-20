@@ -1,16 +1,27 @@
-import { FormControl, FormLabel, Input, InputProps } from "@chakra-ui/react";
+import {
+  FormControl,
+  FormLabel,
+  Input,
+  InputGroup,
+  InputLeftElement,
+  InputProps,
+} from "@chakra-ui/react";
 
 interface Props extends InputProps {
-  label?: string
+  label?: string;
+  leftIcon?: React.ReactNode;
 }
 
 export function InputPrimary(props: Props) {
-  const { children,label,  ...rest } = props;
+  const { children, leftIcon, label, ...rest } = props;
 
   return (
     <FormControl>
       {label && <FormLabel>{label}</FormLabel>}
-      <Input {...rest} />
+      <InputGroup>
+        <InputLeftElement pointerEvents="none" children={leftIcon} />
+        <Input {...rest} />
+      </InputGroup>
     </FormControl>
   );
 }

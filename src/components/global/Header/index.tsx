@@ -1,10 +1,13 @@
 import { Flex, HStack, Heading, Image } from "@chakra-ui/react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import mainIcon from "../../../assets/main-icon.svg";
 import { useAuth } from "../../../context/Auth";
 import { InputPrimary } from "../InputPrimary";
 import { ButtonPrimary } from "../butons/ButtonPrimary";
+import { IconExit } from "../../icons/IconExit";
+import { IconSearch } from "../../icons/IconSearch";
+import { IconInvoice } from "../../icons/IconInvoice";
+import { IconMain } from "../../icons/IconMain";
 
 export function Header() {
   const navigate = useNavigate();
@@ -16,7 +19,7 @@ export function Header() {
     <HStack spacing="32px" px="123px" py="28px">
       <Link to="/home">
         <HStack spacing="12px">
-          <Image src={mainIcon} alt="Logo do app" />
+          <IconMain boxSize="29.2px" />
           <Heading>food explorer</Heading>
         </HStack>
       </Link>
@@ -24,14 +27,17 @@ export function Header() {
       <Flex flex={1}>
         <InputPrimary
           placeholder="Pesquisar pelo título"
+          leftIcon={<IconSearch boxSize="19px" />}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
       </Flex>
 
-      <ButtonPrimary type="button">
+      <ButtonPrimary leftIcon={<IconInvoice boxSize="20px" />} type="button">
         Meu pedido ({total})
       </ButtonPrimary>
+
+      <IconExit boxSize="22px" />
     </HStack>
   );
 }
