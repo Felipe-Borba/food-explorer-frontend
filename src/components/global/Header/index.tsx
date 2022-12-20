@@ -17,7 +17,7 @@ export function Header() {
   const total = 0;
 
   return (
-    <HStack spacing="32px" px="123px" py="28px">
+    <HStack spacing="32px" px="123px" py="24px" bgColor="#00111A">
       <Link to="/home">
         <HStack spacing="12px">
           <IconMain boxSize="29.2px" />

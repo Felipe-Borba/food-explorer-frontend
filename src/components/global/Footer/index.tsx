@@ -11,6 +11,7 @@ export default function Footer() {
       alignItems="flex-end"
       justifyContent="space-between"
       opacity={0.3}
+      bgColor="#00111A"
     >
       <HStack spacing="12px">
         <IconMain boxSize="29.2px" />

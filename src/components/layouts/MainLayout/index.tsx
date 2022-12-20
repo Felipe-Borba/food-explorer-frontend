@@ -5,18 +5,18 @@ import { Flex, Grid, GridItem } from "@chakra-ui/react";
 
 interface Props {
   children: React.ReactNode;
-  header?: ReactNode
+  header?: ReactNode;
 }
 
 export function MainLayout(props: Props) {
-  const { children, header=<Header/> } = props;
+  const { children, header = <Header /> } = props;
 
   return (
     <Flex flexDir="column" h="100vh" justifyContent="space-between">
       <Flex flexDir="column">
         {header}
 
-        {children}
+        <Flex bgColor="#000A0F">{children}</Flex>
       </Flex>
 
       <Footer />
