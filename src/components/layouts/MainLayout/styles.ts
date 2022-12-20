@@ -1,9 +1,10 @@
 import styled from "styled-components";
 
-
 export const Container = styled.div`
   width: 100vw;
   height: 100vh;
+  align-content: space-between;
+  justify-content: center;
 
   display: grid;
   grid-template-rows: 11vh auto;
@@ -11,19 +12,16 @@ export const Container = styled.div`
     "header"
     "content"
     "footer";
-
-  > main {
-    grid-area: content;
-    height: 89vh;
-    padding: 40px 120px 0px;
-  }
 `;
 
+export const Main = styled.main`
+  grid-area: content;
+`;
 
 export const Head = styled.div`
   grid-area: header;
 `;
 
-export const Footer = styled.div`
+export const Foot = styled.div`
   grid-area: footer;
 `;

@@ -7,6 +7,9 @@ export const Routes = () => {
   const { data } = useAuth();
 
   return (
-    <BrowserRouter>{data.user ? <AppRoutes /> : <AuthRoutes />}</BrowserRouter>
+    <BrowserRouter>
+      <AuthRoutes />
+      {data.user && <AppRoutes />}
+    </BrowserRouter>
   );
 };

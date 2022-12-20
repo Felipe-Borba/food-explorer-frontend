@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 import mainIcon from "../../../assets/main-icon.svg";
 import { Container, Content, Menu } from "./styles";
 
@@ -32,4 +31,3 @@ export default function SigInLayout(props: Props) {
     </Container>
   );
 }
-

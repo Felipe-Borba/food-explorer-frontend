@@ -7,7 +7,7 @@ export function Input(props: Props) {
   return (
     <InputContainer>
       {children}
-      <legend>{rest.title}</legend>
+      {rest.title && <legend>{rest.title}</legend>}
       <input {...rest} />
     </InputContainer>
   );
@@ -15,7 +15,7 @@ export function Input(props: Props) {
 
 export const InputContainer = styled.fieldset`
   border: 0;
-  width: 100%;
+  flex: 1;
 
   legend {
     margin-bottom: 8px;
@@ -30,6 +30,7 @@ export const InputContainer = styled.fieldset`
   }
 
   > input {
+    display: flex;
     width: 100%;
     flex-direction: row;
     justify-content: center;

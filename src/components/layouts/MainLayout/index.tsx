@@ -1,22 +1,24 @@
 import React from "react";
-import { Container, Footer, Head } from "./styles";
+import Footer from "../../global/Footer";
+import { Header } from "../../global/Header";
+import { Container, Foot, Head, Main } from "./styles";
 
 interface Props {
   children: React.ReactNode;
-  header?: React.ReactNode;
-  footer?: React.ReactNode;
 }
 
 export function MainLayout(props: Props) {
-  const { children, header = <></>, footer = <></> } = props;
+  const { children } = props;
 
   return (
     <Container>
-      <Head>{header}</Head>
-
-      <main>{children}</main>
-
-      <Footer>{footer}</Footer>
+      <Head>
+        <Header />
+      </Head>
+      <Main>{children}</Main>
+      <Foot>
+        <Footer />
+      </Foot>
     </Container>
   );
 }

@@ -19,6 +19,36 @@ export const GlobalStyle = createGlobalStyle`
     text-decoration: none;
   }
 
+  h1 {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 40px;
+    line-height: 140%;
+
+    color: #E1E1E6;
+  }
+
+  h2 {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 24px;
+
+    color: #FFFFFF;
+  }
+
+  h3 {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 25.1109px;
+    line-height: 29px;
+
+    color: #FFFFFF;
+  }
+
   button, a {
     cursor: pointer;
     transition: filter 0.2s;
