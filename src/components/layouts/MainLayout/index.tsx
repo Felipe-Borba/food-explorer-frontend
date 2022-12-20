@@ -1,7 +1,7 @@
 import React from "react";
 import Footer from "../../global/Footer";
 import { Header } from "../../global/Header";
-import { Container, Foot, Head, Main } from "./styles";
+import { Flex, Grid, GridItem } from "@chakra-ui/react";
 
 interface Props {
   children: React.ReactNode;
@@ -11,14 +11,14 @@ export function MainLayout(props: Props) {
   const { children } = props;
 
   return (
-    <Container>
-      <Head>
+    <Flex flexDir="column" h="100vh" justifyContent={"space-between"}>
+      <Flex flexDir="column">
         <Header />
-      </Head>
-      <Main>{children}</Main>
-      <Foot>
-        <Footer />
-      </Foot>
-    </Container>
+
+        {children}
+      </Flex>
+
+      <Footer />
+    </Flex>
   );
 }

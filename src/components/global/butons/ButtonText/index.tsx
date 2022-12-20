@@ -1,26 +1,12 @@
-import React from "react";
-import styled from "styled-components";
+import { Button, ButtonProps } from "@chakra-ui/react";
 
-interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
+interface Props extends ButtonProps {}
 export function ButtonText(props: Props) {
   const { children, ...rest } = props;
 
   return (
-    <Container type="button" {...rest}>
+    <Button variant="link" fontSize="14px" color={"#FFFFFF"} {...rest}>
       {children}
-    </Container>
+    </Button>
   );
 }
-
-const Container = styled.button`
-  background: none;
-  border: none;
-
-  font-family: "Poppins";
-  font-style: normal;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 24px;
-
-  color: #ffffff;
-`;

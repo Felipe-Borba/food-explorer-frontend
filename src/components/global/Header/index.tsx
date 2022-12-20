@@ -1,9 +1,9 @@
+import { Flex, HStack, Heading, Image } from "@chakra-ui/react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import styled from "styled-components";
 import mainIcon from "../../../assets/main-icon.svg";
 import { useAuth } from "../../../context/Auth";
-import { Input } from "../Input";
+import { InputPrimary } from "../InputPrimary";
 import { ButtonPrimary } from "../butons/ButtonPrimary";
 
 export function Header() {
@@ -13,38 +13,25 @@ export function Header() {
   const total = 0;
 
   return (
-    <Container>
+    <HStack spacing="32px" px="123px" py="28px">
       <Link to="/home">
-        <img src={mainIcon} alt="Logo do app" />
-        <h3>food explorer</h3>
+        <HStack spacing="12px">
+          <Image src={mainIcon} alt="Logo do app" />
+          <Heading>food explorer</Heading>
+        </HStack>
       </Link>
 
-      <Input
-        placeholder="Pesquisar pelo título"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
+      <Flex flex={1}>
+        <InputPrimary
+          placeholder="Pesquisar pelo título"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+      </Flex>
 
-      <ButtonPrimary type="button">Meu pedido ({total})</ButtonPrimary>
-    </Container>
+      <ButtonPrimary type="button">
+        Meu pedido ({total})
+      </ButtonPrimary>
+    </HStack>
   );
 }
-
-const Container = styled.header`
-  width: 100vw;
-  display: flex;
-  flex-dir: row;
-  align-items: center;
-  justify-content: center;
-
-  padding: 24px 123px;
-  gap: 32px;
-
-  > a {
-    display: flex;
-    flex: 1;
-    flex-dir: row;
-    align-items: center;
-    justify-content: center;
-  }
-`;

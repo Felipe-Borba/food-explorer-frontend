@@ -1,6 +1,14 @@
 import React from "react";
 import mainIcon from "../../../assets/main-icon.svg";
-import { Container, Content, Menu } from "./styles";
+import {
+  FormControl,
+  Grid,
+  GridItem,
+  HStack,
+  Heading,
+  Image,
+  VStack,
+} from "@chakra-ui/react";
 
 interface Props {
   sectionText: string;
@@ -17,17 +25,37 @@ export default function SigInLayout(props: Props) {
   }
 
   return (
-    <Container>
-      <Menu>
-        <img src={mainIcon} alt="Logo do app" />
-        <h1>food explorer</h1>
-      </Menu>
+    <Grid
+      h="100vh"
+      w="100vw"
+      px="108px"
+      justifyContent={"space-between"}
+      templateAreas={`"logo form"`}
+      gridTemplateColumns={"2fr 2fr"}
+    >
+      <GridItem alignSelf={"center"} area={"logo"}>
+        <HStack spacing="20px" mb="100px">
+          <Image src={mainIcon} alt="Logo do app" />
+          <Heading fontSize="43px">food explorer</Heading>
+        </HStack>
+      </GridItem>
 
-      <Content onSubmit={handleOnSubmit}>
-        <h2>{sectionText}</h2>
+      <GridItem alignSelf={"center"} area={"form"}>
+        <form onSubmit={handleOnSubmit}>
+          <VStack
+            spacing="32px"
+            bgColor={"#001119"}
+            p="64px"
+            borderRadius="16px"
+          >
+            <Heading fontSize="32px" fontFamily="Poppins">
+              {sectionText}
+            </Heading>
 
-        {children}
-      </Content>
-    </Container>
+            {children}
+          </VStack>
+        </form>
+      </GridItem>
+    </Grid>
   );
 }
