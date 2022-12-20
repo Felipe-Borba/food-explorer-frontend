@@ -8,6 +8,7 @@ import { IconExit } from "../../icons/IconExit";
 import { IconSearch } from "../../icons/IconSearch";
 import { IconInvoice } from "../../icons/IconInvoice";
 import { IconMain } from "../../icons/IconMain";
+import { ButtonText } from "../butons/ButtonText";
 
 export function Header() {
   const navigate = useNavigate();
@@ -24,6 +25,10 @@ export function Header() {
         </HStack>
       </Link>
 
+      <ButtonText color={"#E1E1E6"} fontSize="16px" fontWeight="400">
+        Meus favoritos
+      </ButtonText>
+
       <Flex flex={1}>
         <InputPrimary
           placeholder="Pesquisar pelo título"
@@ -33,7 +38,7 @@ export function Header() {
         />
       </Flex>
 
-      <ButtonPrimary leftIcon={<IconInvoice boxSize="20px" />} type="button">
+      <ButtonPrimary leftIcon={<IconInvoice boxSize="20px" />}>
         Meu pedido ({total})
       </ButtonPrimary>
 

@@ -10,6 +10,9 @@ export function ButtonPrimary(props: Props) {
       px="32px"
       fontSize="14px"
       bgColor={"#92000E"}
+      _hover={{
+        opacity: 0.7,
+      }}
       {...rest}
     >
       {children}
