@@ -28,6 +28,7 @@ export function DishCard() {
       flexDir={"column"}
       alignItems="center"
       justifyContent="center"
+      textAlign="center"
       borderRadius="8px"
       borderColor={"rgba(0, 0, 0, 0.65)"}
       borderWidth="1px"
@@ -61,6 +62,8 @@ export function DishCard() {
         fontSize="24px"
         fontWeight={"700"}
         mt="16px"
+        w="255px"
+        noOfLines={1}
       >
         {name} {">"}
       </Heading>
