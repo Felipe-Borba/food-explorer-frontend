@@ -7,8 +7,8 @@ import {
   SkeletonCircle,
   Text,
 } from "@chakra-ui/react";
-import { ButtonText } from "../../components/global/butons/ButtonText";
 import { ButtonPrimary } from "../../components/global/butons/ButtonPrimary";
+import { ButtonText } from "../../components/global/butons/ButtonText";
 import { IconHeart } from "../../components/icons/IconHeart";
 
 export function DishCard() {
@@ -40,6 +40,12 @@ export function DishCard() {
         right={6}
         aria-label="Like"
         bgColor="transparent"
+        _hover={{
+          transform: "scale(1.2, 1.2)",
+        }}
+        _active={{
+          transform: "scale(1.3, 1.3)",
+        }}
         icon={
           favorite ? (
             <IconHeart boxSize="25px" fill="red" stroke="red" />

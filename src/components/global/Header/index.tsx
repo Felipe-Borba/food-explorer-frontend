@@ -1,4 +1,4 @@
-import { Flex, HStack, Heading, Image } from "@chakra-ui/react";
+import { Flex, HStack, Heading, IconButton, Image } from "@chakra-ui/react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/Auth";
@@ -42,7 +42,16 @@ export function Header() {
         Meu pedido ({total})
       </ButtonPrimary>
 
-      <IconExit boxSize="22px" />
+      <IconButton
+        variant="ghost"
+        aria-label="Exit"
+        bgColor="transparent"
+        _hover={{
+          opacity: 0.5,
+          bgColor: "#ffffffa2",
+        }}
+        icon={<IconExit fill="none" boxSize="22px" />}
+      />
     </HStack>
   );
 }
