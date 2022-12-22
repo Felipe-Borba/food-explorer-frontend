@@ -4,19 +4,25 @@ import { InputPrimary } from "../../components/global/InputPrimary";
 import { ButtonPrimary } from "../../components/global/butons/ButtonPrimary";
 import { ButtonText } from "../../components/global/butons/ButtonText";
 import SigInLayout from "../../components/layouts/SignInLayout";
+import { useAuth } from "../../context/Auth";
 
 export default function SignIn() {
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const { createUser } = useAuth();
 
   async function handleSignIn() {
-    // navigate("/home");
+    const response = await createUser({ name: nome, email, password });
+    alert(response.message.join("\n"));
+    if (response.status < 300) {
+      navigate("/sign-in");
+    }
   }
 
   return (
-    <SigInLayout sectionText="Criar sua conta" onSubmit={handleSignIn}>
+    <SigInLayout sectionText="Criar sua conta">
       <InputPrimary
         label="Seu nome"
         placeholder="Exemplo: Maria da Silva"
@@ -36,7 +42,7 @@ export default function SignIn() {
         onChange={(e) => setPassword(e.target.value)}
       />
 
-      <ButtonPrimary type="submit" w={"100%"}>
+      <ButtonPrimary w={"100%"} onClick={handleSignIn}>
         Criar conta
       </ButtonPrimary>
 

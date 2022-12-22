@@ -1,45 +1,32 @@
 import { PropsWithChildren, createContext, useContext, useState } from "react";
-import { AuthData, LogInProps, UserUpdate } from "./types";
+import { api } from "../../services/api";
+import {
+  AuthContext,
+  AuthData,
+  CreateUser,
+  LogInProps,
+  UserUpdate,
+} from "./types";
 
-export const AuthContext = createContext({
-  data: {
-    user: null,
-  } as AuthData,
-  async logIn(props: LogInProps) {},
-  signOut() {},
-  async updateUser(user: UserUpdate) {},
-});
+const AuthCtx = createContext<AuthContext | null>(null);
 
 export function useAuth() {
-  const context = useContext(AuthContext);
+  const context = useContext(AuthCtx);
+
+  if (!context) {
+    throw new Error("AuthContext not loaded!");
+  }
 
   return context;
 }
 
 export function AuthProvider({ children }: PropsWithChildren) {
   const [data, setData] = useState<AuthData>({
-    user: {
-      id: 1,
-      name: "felipe",
-      created_at: "01091995",
-      email: "na",
-      password: "123",
-      updated_at: "12312",
-    },
+    user: null,
   });
 
   async function logIn(props: LogInProps) {
     console.log("todo");
-    setData({
-      user: {
-        id: 1,
-        created_at: "01-09-2002",
-        email: "email.com",
-        name: "fulano",
-        password: "123",
-        updated_at: "01-09-2002",
-      },
-    });
   }
 
   function signOut() {
@@ -50,9 +37,28 @@ export function AuthProvider({ children }: PropsWithChildren) {
     console.log("todo");
   }
 
+  async function createUser({ email, name, password }: CreateUser) {
+    return api
+      .post("/users", { nome: name, email, senha: password })
+      .then((response) => {
+        return { status: response.status, message: ["Usuário criado"] };
+      })
+      .catch((error) => {
+        if (error?.response) {
+          const { data, status } = error.response;
+
+          return {
+            status: status,
+            message:
+              typeof data.message === "string" ? [data.message] : data.message,
+          };
+        }
+
+        return { status: 500, message: ["Nao foi possível cadastrar!"] };
+      });
+  }
+
   return (
-    <AuthContext.Provider value={{ updateUser, logIn, data, signOut }}>
-      {children}
-    </AuthContext.Provider>
+    <AuthCtx.Provider value={{ createUser, data }}>{children}</AuthCtx.Provider>
   );
 }
