@@ -1,8 +1,4 @@
-export interface UserUpdate {
-  name: string;
-  email: string;
-  password: string;
-}
+import { ApiResponse } from "../../services/api";
 
 export interface CreateUser {
   name: string;
@@ -10,7 +6,7 @@ export interface CreateUser {
   password: string;
 }
 
-export interface LogInProps {
+export interface LogIn {
   email: string;
   password: string;
 }
@@ -32,5 +28,7 @@ export interface AuthContext {
   data: {
     user: User | null;
   };
-  createUser(user: CreateUser): Promise<{ status: number; message: string[] }>;
+  createUser(user: CreateUser): Promise<ApiResponse>;
+  logIn(user: LogIn): Promise<ApiResponse>
+  signOut():void;
 }

@@ -13,11 +13,12 @@ export default function SignIn() {
   const { logIn } = useAuth();
 
   async function handleSignIn() {
-    try {
-      await logIn({ email, password });
+    const response = await logIn({ email, password });
+
+    if (response.status < 300) {
       navigate("/home");
-    } catch (error) {
-      alert(error);
+    } else {
+      alert(response.message?.join("\n"));
     }
   }
 

@@ -15,7 +15,8 @@ export default function SignIn() {
 
   async function handleSignIn() {
     const response = await createUser({ name: nome, email, password });
-    alert(response.message.join("\n"));
+    alert(response.message?.join("\n"));
+
     if (response.status < 300) {
       navigate("/sign-in");
     }
