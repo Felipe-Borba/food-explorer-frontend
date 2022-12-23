@@ -19,21 +19,21 @@ export default function Home() {
           <Heading fontWeight="500" fontFamily="Poppins" mb="39px">
             Pratos principais
           </Heading>
-          <ScrollHorizontal />
+          <ScrollHorizontal type="principal" />
         </Box>
 
         <Box>
           <Heading fontWeight="500" fontFamily="Poppins" mb="39px">
             Sobremesas
           </Heading>
-          <ScrollHorizontal />
+          <ScrollHorizontal type="sobremesa" />
         </Box>
 
         <Box>
           <Heading fontWeight="500" fontFamily="Poppins" mb="39px">
             Bebidas
           </Heading>
-          <ScrollHorizontal />
+          <ScrollHorizontal type="bebida" />
         </Box>
       </VStack>
     </MainLayout>

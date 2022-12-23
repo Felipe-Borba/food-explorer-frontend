@@ -1,9 +1,18 @@
-import { Button, ButtonProps, Flex, HStack } from "@chakra-ui/react";
-import { DishCard } from "./DishCard";
+import { Button, ButtonProps, Flex, HStack, Text } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 import { IconArrowLeft } from "../../components/icons/IconArrowLeft";
 import { IconArrowRight } from "../../components/icons/IconArrowRight";
+import { useDish } from "../../context/Dish";
+import { DishList, DishType } from "../../context/Dish/types";
+import { DishCard } from "./DishCard";
 
-export function ScrollHorizontal() {
+interface Props {
+  type: DishType;
+}
+export function ScrollHorizontal({ type }: Props) {
+  const { getDishList } = useDish();
+  const [data, setData] = useState<DishList[]>([]);
+
   const slideLeft = () => {
     var slider = document.getElementById("slider");
     if (!slider) return;
@@ -16,7 +25,23 @@ export function ScrollHorizontal() {
     slider.scrollLeft = slider.scrollLeft + 500;
   };
 
-  const data = Array(20).fill(0);
+  useEffect(() => {
+    async function fetch() {
+      const data = await getDishList(type);
+      setData(data);
+    }
+
+    fetch();
+  }, []);
+
+  if (!data.length) {
+    return (
+      <Flex my={3}>
+        <Text color="#7C7C8A">Cardápio vazio</Text>
+      </Flex>
+    );
+  }
+
   return (
     <Flex position="relative" justifyItems="center">
       <ButtonScroll

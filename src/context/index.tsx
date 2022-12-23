@@ -1,10 +1,11 @@
-import React, { PropsWithChildren } from 'react'
-import { AuthProvider } from './Auth'
+import React, { PropsWithChildren } from "react";
+import { AuthProvider } from "./Auth";
+import { DishProvider } from "./Dish";
 
 export default function Context(props: PropsWithChildren) {
   return (
     <AuthProvider>
-      {props.children}
+      <DishProvider>{props.children}</DishProvider>
     </AuthProvider>
-  )
+  );
 }
