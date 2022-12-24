@@ -26,9 +26,8 @@ export function DishProvider({ children }: PropsWithChildren) {
   async function getDishList(type: DishType) {
     try {
       const response = await api.get("/dish");
-      console.log(response.status, response.data);
 
-      return [];
+      return response.data.dishes;
     } catch (error) {
       console.log(error);
 
