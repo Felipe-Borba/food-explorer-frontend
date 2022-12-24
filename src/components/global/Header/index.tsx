@@ -16,6 +16,11 @@ export function Header() {
   const [search, setSearch] = useState("");
   const total = 0;
 
+  function handleLogOut() {
+    signOut();
+    navigate("/sign-in");
+  }
+
   return (
     <HStack spacing="32px" px="123px" py="24px" bgColor="#00111A">
       <Link to="/home">
@@ -51,6 +56,7 @@ export function Header() {
           bgColor: "#ffffffa2",
         }}
         icon={<IconExit fill="none" boxSize="22px" />}
+        onClick={handleLogOut}
       />
     </HStack>
   );

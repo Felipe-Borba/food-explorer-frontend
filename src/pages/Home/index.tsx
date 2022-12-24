@@ -1,9 +1,15 @@
 import { Box, Heading, VStack } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
+import { ButtonPrimary } from "../../components/global/butons/ButtonPrimary";
 import { MainLayout } from "../../components/layouts/MainLayout";
+import { useAuth } from "../../context/Auth";
 import { Hero } from "./Hero";
 import { ScrollHorizontal } from "./ScrollHorizontal";
 
 export default function Home() {
+  const { data } = useAuth();
+  const navigate = useNavigate();
+
   return (
     <MainLayout>
       <Hero />
@@ -35,6 +41,12 @@ export default function Home() {
           </Heading>
           <ScrollHorizontal type="bebida" />
         </Box>
+
+        {data.user?.role === "admin" && (
+          <ButtonPrimary onClick={() => navigate("/dish/create")}>
+            Cadastrar um prato
+          </ButtonPrimary>
+        )}
       </VStack>
     </MainLayout>
   );

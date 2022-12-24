@@ -20,6 +20,7 @@ export interface User {
   name: string;
   email: string;
   password: string;
+  role: string;
   created_at: string;
   updated_at: string;
 }
@@ -29,6 +30,6 @@ export interface AuthContext {
     user: User | null;
   };
   createUser(user: CreateUser): Promise<ApiResponse>;
-  logIn(user: LogIn): Promise<ApiResponse>
-  signOut():void;
+  logIn(user: LogIn): Promise<ApiResponse>;
+  signOut(): void;
 }
