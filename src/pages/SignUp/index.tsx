@@ -23,7 +23,7 @@ export default function SignIn() {
   }
 
   return (
-    <SigInLayout sectionText="Criar sua conta">
+    <SigInLayout sectionText="Criar sua conta" onSubmit={handleSignIn}>
       <InputPrimary
         label="Seu nome"
         placeholder="Exemplo: Maria da Silva"
@@ -43,7 +43,7 @@ export default function SignIn() {
         onChange={(e) => setPassword(e.target.value)}
       />
 
-      <ButtonPrimary w={"100%"} onClick={handleSignIn}>
+      <ButtonPrimary w={"100%"} type="submit">
         Criar conta
       </ButtonPrimary>
 

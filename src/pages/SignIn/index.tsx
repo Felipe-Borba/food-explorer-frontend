@@ -23,7 +23,7 @@ export default function SignIn() {
   }
 
   return (
-    <SigInLayout sectionText="Faça seu login">
+    <SigInLayout sectionText="Faça seu login" onSubmit={handleSignIn}>
       <InputPrimary
         label="E-mail"
         placeholder="Exemplo: exemplo@exemplo.com.br"
@@ -37,7 +37,7 @@ export default function SignIn() {
         onChange={(e) => setPassword(e.target.value)}
       />
 
-      <ButtonPrimary w={"100%"} onClick={handleSignIn}>
+      <ButtonPrimary type="submit" w={"100%"}>
         Entrar
       </ButtonPrimary>
 

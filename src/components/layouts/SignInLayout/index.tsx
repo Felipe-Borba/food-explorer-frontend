@@ -13,10 +13,16 @@ import { IconMain } from "../../icons/IconMain";
 interface Props {
   sectionText: string;
   children: React.ReactNode;
+  onSubmit: () => void;
 }
 
 export default function SigInLayout(props: Props) {
-  const { children, sectionText } = props;
+  const { children, sectionText, onSubmit } = props;
+
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    onSubmit();
+  }
 
   return (
     <Grid
@@ -34,13 +40,20 @@ export default function SigInLayout(props: Props) {
       </GridItem>
 
       <GridItem alignSelf={"center"} area={"form"}>
-        <VStack spacing="32px" bgColor={"#001119"} p="64px" borderRadius="16px">
-          <Heading fontSize="32px" fontFamily="Poppins">
-            {sectionText}
-          </Heading>
+        <form onSubmit={handleSubmit}>
+          <VStack
+            spacing="32px"
+            bgColor={"#001119"}
+            p="64px"
+            borderRadius="16px"
+          >
+            <Heading fontSize="32px" fontFamily="Poppins">
+              {sectionText}
+            </Heading>
 
-          {children}
-        </VStack>
+            {children}
+          </VStack>
+        </form>
       </GridItem>
     </Grid>
   );
