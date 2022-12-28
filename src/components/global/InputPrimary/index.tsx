@@ -17,10 +17,25 @@ export function InputPrimary(props: Props) {
 
   return (
     <FormControl>
-      {label && <FormLabel>{label}</FormLabel>}
+      {label && (
+        <FormLabel
+          fontSize="16px"
+          fontFamily="Roboto"
+          fontWeight="400"
+          color="#C4C4CC"
+        >
+          {label}
+        </FormLabel>
+      )}
       <InputGroup>
-        <InputLeftElement pointerEvents="none" children={leftIcon} />
-        <Input {...rest} />
+        {leftIcon && (
+          <InputLeftElement
+            pointerEvents="none"
+            children={leftIcon}
+            alignItems="flex-end"
+          />
+        )}
+        <Input py="16px" px="14px" h="48px" fontSize="16px" {...rest} />
       </InputGroup>
     </FormControl>
   );
