@@ -27,13 +27,7 @@ export default function DishCreate() {
 
   return (
     <MainLayout header={<HeaderAdmin />}>
-      <VStack
-        // spacing="32px"
-        my="32px"
-        mx="123px"
-        alignItems="flex-start"
-        flex={1}
-      >
+      <VStack my="32px" mx="123px" alignItems="flex-start" flex={1}>
         <ButtonText fontSize="24px" my="32px">
           <IconArrowLeft mr="11px" />
           Voltar
@@ -115,9 +109,16 @@ export function Ingredients({ tags, setTags }: Props) {
 
   return (
     <Flex flexDir="column" gap="8px">
-      <Text>Marcadores</Text>
+      <Text
+        fontSize="16px"
+        fontFamily="Roboto"
+        fontWeight="400"
+        color="#C4C4CC"
+      >
+        Marcadores
+      </Text>
 
-      <HStack gap="16px" borderWidth="1px" borderRadius="8px" p="8px">
+      <HStack gap="16px" borderWidth="1px" borderRadius="8px" p="8px" h="48px">
         {tags?.map((tag, index) => {
           return (
             <Box
@@ -141,6 +142,7 @@ export function Ingredients({ tags, setTags }: Props) {
           alignItems="center"
           borderStyle="dashed"
           borderWidth="1px"
+          borderColor="#7C7C8A"
           borderRadius="8px"
           py="7px"
           px="16px"
