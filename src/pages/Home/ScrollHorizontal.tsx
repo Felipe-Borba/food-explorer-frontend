@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { IconArrowLeft } from "../../components/icons/IconArrowLeft";
 import { IconArrowRight } from "../../components/icons/IconArrowRight";
 import { useDish } from "../../context/Dish";
-import { DishList, DishType } from "../../context/Dish/types";
+import { Dish, DishType } from "../../context/Dish/types";
 import { DishCard } from "./DishCard";
 
 interface Props {
@@ -11,7 +11,7 @@ interface Props {
 }
 export function ScrollHorizontal({ type }: Props) {
   const { getDishList } = useDish();
-  const [data, setData] = useState<DishList[]>([]);
+  const [data, setData] = useState<Dish[]>([]);
 
   const slideLeft = () => {
     var slider = document.getElementById("slider");
@@ -65,7 +65,13 @@ export function ScrollHorizontal({ type }: Props) {
         }}
       >
         {data.map((item, index) => (
-          <DishCard key={index} />
+          <DishCard
+            key={index}
+            description={item.description}
+            image={item.image}
+            name={item.name}
+            price={item.price}
+          />
         ))}
       </HStack>
       <ButtonScroll

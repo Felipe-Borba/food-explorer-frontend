@@ -1,12 +1,6 @@
-import {
-  PropsWithChildren,
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
-import { ApiResponse, api, apiErrorParser } from "../../services/api";
-import { DishContext, DishData, DishType } from "./types";
+import { PropsWithChildren, createContext, useContext, useState } from "react";
+import { api } from "../../services/api";
+import { DishContext, DishType } from "./types";
 
 const DishCtx = createContext<DishContext | null>(null);
 

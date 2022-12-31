@@ -1,18 +1,17 @@
-import { ApiResponse } from "../../services/api";
-
 export interface Dish {
   id: number;
   name: string;
-}
-
-export interface DishList {
-  id: number;
-  name: string;
+  description: string;
+  image: string;
+  price: number;
+  type: DishType;
+  created_at: string;
+  updated_at: string;
 }
 
 export interface DishData {
   dish: Dish | null;
-  dishList: DishList[];
+  dishList: Dish[];
 }
 
 export type DishType = "principal" | "sobremesa" | "bebida";

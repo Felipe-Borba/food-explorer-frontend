@@ -7,18 +7,47 @@ import {
   SkeletonCircle,
   Text,
 } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 import { ButtonPrimary } from "../../components/global/butons/ButtonPrimary";
 import { ButtonText } from "../../components/global/butons/ButtonText";
 import { IconHeart } from "../../components/icons/IconHeart";
 
-export function DishCard() {
-  const name = "Torradas de Parma";
-  const description =
-    "Presunto de parma e rúcula em um pão com fermentação natural.";
-  const price = 25.97;
-  const quantity = 1;
-  const image = "";
-  const favorite = false;
+interface Props {
+  name?: string;
+  description?: string;
+  price?: number;
+  quantity?: number;
+  image?: string;
+  favorite?: boolean;
+}
+export function DishCard({
+  description = "na",
+  image = "",
+  name = "nome",
+  price = 0.99,
+  quantity = 1,
+  favorite = false,
+}: Props) {
+  const [imageData, setImageData] = useState<any>("");
+
+  useEffect(() => {
+    async function getImage() {
+      // const response = await api.get(`/files/${image}`, {
+      //   responseType: "arraybuffer",
+      // });
+
+      // const data = `data:${
+      //   response.headers["content-type"]
+      // };base64,${Buffer.alloc(response.data).toString("base64")}`;
+
+      // console.log(data);
+      //TODO find a way to display image from server with authentication
+      const baseURL = import.meta.env.VITE_API_URL;
+      setImageData(`${baseURL}/files/${image}`);
+    }
+
+    getImage();
+  }, [image]);
 
   return (
     <Flex
@@ -56,11 +85,16 @@ export function DishCard() {
       />
 
       <SkeletonCircle
-        isLoaded={Boolean(image)}
+        isLoaded={Boolean(imageData)}
         boxSize={"176px"}
         overflow="hidden"
       >
-        <Image objectFit="cover" src={image} alt="Foto do prato" />
+        <Image
+          objectFit="cover"
+          // src={`${baseURL}/files/${image}`}
+          src={imageData}
+          alt="Foto do prato"
+        />
       </SkeletonCircle>
 
       <Heading

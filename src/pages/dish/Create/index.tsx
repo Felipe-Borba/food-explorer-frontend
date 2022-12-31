@@ -50,7 +50,7 @@ export default function DishCreate() {
         descricao,
       });
       const newDish = response.data;
-      console.log("1", response.data, response.status);
+      console.log("1!", response.data, response.status);
 
       const dishImage = new FormData();
       dishImage.append("imagem", imagem);
@@ -58,7 +58,7 @@ export default function DishCreate() {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
-      console.log("2", updated.data, updated.status);
+      console.log("2@", updated.data, updated.status);
     } catch (error) {
       const err = apiErrorParser(error, "não foi possível cadastrar um prato");
       alert(err.message?.join("\n"));
