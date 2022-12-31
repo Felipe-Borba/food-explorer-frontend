@@ -9,7 +9,10 @@ export interface ApiResponse {
   message?: string[];
 }
 
-export function apiErrorParser(error: any, genericErrorMessage: string): ApiResponse {
+export function apiErrorParser(
+  error: any,
+  genericErrorMessage: string
+): ApiResponse {
   if (error?.response) {
     const { data, status } = error.response;
 
