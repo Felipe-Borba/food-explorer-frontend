@@ -19,7 +19,7 @@ export function DishProvider({ children }: PropsWithChildren) {
 
   async function getDishList(type: DishType) {
     try {
-      const response = await api.get("/dish");
+      const response = await api.get("/dish", { params: { type } });
 
       return response.data.dishes;
     } catch (error) {
