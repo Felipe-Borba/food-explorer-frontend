@@ -11,9 +11,11 @@ import { useEffect, useState } from "react";
 import { ButtonPrimary } from "../../components/global/butons/ButtonPrimary";
 import { ButtonText } from "../../components/global/butons/ButtonText";
 import { IconHeart } from "../../components/icons/IconHeart";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   name?: string;
+  id: number;
   description?: string;
   price?: number;
   quantity?: number;
@@ -21,6 +23,7 @@ interface Props {
   favorite?: boolean;
 }
 export function DishCard({
+  id,
   description = "na",
   image = "",
   name = "nome",
@@ -29,25 +32,20 @@ export function DishCard({
   favorite = false,
 }: Props) {
   const [imageData, setImageData] = useState<any>("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function getImage() {
-      // const response = await api.get(`/files/${image}`, {
-      //   responseType: "arraybuffer",
-      // });
-
-      // const data = `data:${
-      //   response.headers["content-type"]
-      // };base64,${Buffer.alloc(response.data).toString("base64")}`;
-
-      // console.log(data);
-      //TODO find a way to display image from server with authentication
       const baseURL = import.meta.env.VITE_API_URL;
       setImageData(`${baseURL}/files/${image}`);
     }
 
     getImage();
   }, [image]);
+
+  function handleNavigate() {
+    navigate(`/dish/view/${id}`);
+  }
 
   return (
     <Flex
@@ -94,6 +92,8 @@ export function DishCard({
           // src={`${baseURL}/files/${image}`}
           src={imageData}
           alt="Foto do prato"
+          cursor={"pointer"}
+          onClick={handleNavigate}
         />
       </SkeletonCircle>
 

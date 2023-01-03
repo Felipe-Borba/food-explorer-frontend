@@ -67,6 +67,7 @@ export function ScrollHorizontal({ type }: Props) {
         {data.map((item, index) => (
           <DishCard
             key={index}
+            id={item.id}
             description={item.description}
             image={item.image}
             name={item.name}

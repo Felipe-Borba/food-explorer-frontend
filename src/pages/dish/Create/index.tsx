@@ -10,6 +10,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { HeaderAdmin } from "../../../components/global/HeaderAdmin";
 import { InputPrimary } from "../../../components/global/InputPrimary";
 import { ButtonPrimary } from "../../../components/global/butons/ButtonPrimary";
@@ -19,7 +20,6 @@ import { IconUpload } from "../../../components/icons/IconUpload";
 import { MainLayout } from "../../../components/layouts/MainLayout";
 import { api, apiErrorParser } from "../../../services/api";
 import { Ingredients } from "./Ingredients";
-import { useNavigate, useNavigation } from "react-router-dom";
 
 export default function DishCreate() {
   const navigate = useNavigate();
@@ -50,15 +50,14 @@ export default function DishCreate() {
         descricao,
       });
       const newDish = response.data;
-      console.log("1!", response.data, response.status);
 
       const dishImage = new FormData();
       dishImage.append("imagem", imagem);
-      const updated = await api.patch(`/dish/${newDish.id}/imagem`, dishImage, {
+      await api.patch(`/dish/${newDish.id}/imagem`, dishImage, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
-      console.log("2@", updated.data, updated.status);
+      navigate(-1);
     } catch (error) {
       const err = apiErrorParser(error, "não foi possível cadastrar um prato");
       alert(err.message?.join("\n"));
@@ -115,8 +114,8 @@ export default function DishCreate() {
                   value={tipo}
                 >
                   <option value="principal">Prato Principal</option>
-                  <option value="sobremesa">Entrada</option>
-                  <option value="bebida">Suco</option>
+                  <option value="sobremesa">Sobremesa</option>
+                  <option value="bebida">Bebida</option>
                 </Select>
               </InputGroup>
             </FormControl>
