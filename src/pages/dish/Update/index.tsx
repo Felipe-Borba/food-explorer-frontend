@@ -9,8 +9,8 @@ import {
   Textarea,
   VStack,
 } from "@chakra-ui/react";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { HeaderAdmin } from "../../../components/global/HeaderAdmin";
 import { InputPrimary } from "../../../components/global/InputPrimary";
 import { ButtonPrimary } from "../../../components/global/butons/ButtonPrimary";
@@ -21,8 +21,10 @@ import { MainLayout } from "../../../components/layouts/MainLayout";
 import { api, apiErrorParser } from "../../../services/api";
 import { Ingredients } from "./Ingredients";
 
-export default function DishCreate() {
+export default function DishUpdate() {
   const navigate = useNavigate();
+  const { id } = useParams();
+
   const [ingredientes, setIngredientes] = useState<string[]>([]);
   const [imagem, setImagem] = useState("");
   const [nome, setNome] = useState("");
@@ -36,26 +38,22 @@ export default function DishCreate() {
   }
 
   async function handleClick() {
-    if (!imagem) {
-      alert("Selecione uma imagem");
-      return;
-    }
-
     try {
-      const response = await api.post("/dish", {
+      const response = await api.patch(`/dish/${id}`, {
         nome,
         ingredientes,
         preco: Number(preco),
         tipo,
         descricao,
       });
-      const newDish = response.data;
 
-      const dishImage = new FormData();
-      dishImage.append("imagem", imagem);
-      await api.patch(`/dish/${newDish.id}/imagem`, dishImage, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      if (imagem) {
+        const dishImage = new FormData();
+        dishImage.append("imagem", imagem);
+        await api.patch(`/dish/${id}/imagem`, dishImage, {
+          headers: { "Content-Type": "multipart/form-data" },
+        });
+      }
 
       navigate(-1);
     } catch (error) {
@@ -63,6 +61,25 @@ export default function DishCreate() {
       alert(err.message?.join("\n"));
     }
   }
+
+  useEffect(() => {
+    async function fetchDish() {
+      try {
+        const response = await api.get(`/dish/${id}`);
+        const { dish, ingredients } = response.data;
+
+        setNome(dish.name);
+        setPreco(dish.price);
+        setTipo(dish.type);
+        setDescricao(dish.description);
+        setIngredientes(ingredients.map((i: any) => i.name));
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    fetchDish();
+  }, [id]);
 
   return (
     <MainLayout header={<HeaderAdmin />}>
@@ -72,7 +89,7 @@ export default function DishCreate() {
           Voltar
         </ButtonText>
 
-        <Heading>Criar prato</Heading>
+        <Heading>Editar prato</Heading>
 
         <Flex flexWrap="wrap" gap="5%">
           <Box flexGrow={1} flexBasis="30%" mt="32px">

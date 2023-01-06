@@ -1,6 +1,5 @@
 import { Image, Text, VStack } from "@chakra-ui/react";
 
-import alface from "../../../assets/images/pessego.png";
 import ameixa from "../../../assets/images/ameixa.png";
 import amendoas from "../../../assets/images/amendoas.png";
 import aniz from "../../../assets/images/aniz.png";
@@ -17,7 +16,10 @@ import massa from "../../../assets/images/massa.png";
 import pao from "../../../assets/images/pao.png";
 import paoNaan from "../../../assets/images/paoNaan.png";
 import pepino from "../../../assets/images/pepino.png";
-import pessego from "../../../assets/images/pessego.png";
+import {
+  default as alface,
+  default as pessego,
+} from "../../../assets/images/pessego.png";
 import pesto from "../../../assets/images/pesto.png";
 import presunto from "../../../assets/images/presunto.png";
 import rabanete from "../../../assets/images/rabanete.png";
@@ -36,7 +38,6 @@ export function LoadIngredient({ ingredient = "" }) {
       </VStack>
     );
   }
-  console.log(ingredient);
 
   switch (ingredient) {
     case "alface":

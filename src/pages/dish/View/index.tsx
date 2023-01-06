@@ -19,7 +19,6 @@ import { LoadIngredient } from "./LoadIngredient";
 const baseURL = import.meta.env.VITE_API_URL;
 
 //TODO transformar isso numa tela de atualizar os dados só que desativa adição case seja cliente
-// TODO add botao de deletar caso seja admin
 export default function DishView() {
   const navigate = useNavigate();
   const params = useParams();
@@ -33,6 +32,20 @@ export default function DishView() {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState(0);
   const [ingredients, setIngredients] = useState([]);
+
+  async function deleteDish() {
+    try {
+      const exclude = confirm("Tem certeza que deseja excluir?");
+      if (!exclude) {
+        return;
+      }
+
+      await api.delete(`/dish/${id}`);
+      navigate(-1);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   useEffect(() => {
     async function fetchDish() {
@@ -128,10 +141,12 @@ export default function DishView() {
                   <ButtonPrimary>incluir</ButtonPrimary>
                 </>
               ) : (
-                <>
-                  <ButtonPrimary>Excluir</ButtonPrimary>
-                  <ButtonPrimary>Alterar</ButtonPrimary>
-                </>
+                <HStack paddingLeft="24px">
+                  <ButtonPrimary onClick={deleteDish}>Excluir</ButtonPrimary>
+                  <ButtonPrimary onClick={() => navigate(`/dish/update/${id}`)}>
+                    Editar
+                  </ButtonPrimary>
+                </HStack>
               )}
             </HStack>
           </Flex>
