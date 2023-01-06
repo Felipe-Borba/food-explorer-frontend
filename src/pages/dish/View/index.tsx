@@ -14,11 +14,16 @@ import { ButtonText } from "../../../components/global/butons/ButtonText";
 import { IconArrowLeft } from "../../../components/icons/IconArrowLeft";
 import { MainLayout } from "../../../components/layouts/MainLayout";
 import { api } from "../../../services/api";
+import { useAuth } from "../../../context/Auth";
+import { LoadIngredient } from "./LoadIngredient";
 const baseURL = import.meta.env.VITE_API_URL;
 
+//TODO transformar isso numa tela de atualizar os dados só que desativa adição case seja cliente
+// TODO add botao de deletar caso seja admin
 export default function DishView() {
   const navigate = useNavigate();
   const params = useParams();
+  const { data } = useAuth();
   const { id } = params;
 
   const quantity = 0;
@@ -27,6 +32,7 @@ export default function DishView() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState(0);
+  const [ingredients, setIngredients] = useState([]);
 
   useEffect(() => {
     async function fetchDish() {
@@ -38,6 +44,7 @@ export default function DishView() {
         setName(dish.name);
         setPrice(dish.price);
         setDescription(dish.description);
+        setIngredients(ingredients.map((i: any) => i.name));
       } catch (error) {
         console.log(error);
       }
@@ -83,30 +90,49 @@ export default function DishView() {
               {description}
             </Text>
 
-            {/* //TODO ingredients container */}
+            <HStack gap="16px" mt="26px" alignItems={"baseline"}>
+              {ingredients.map((name, index) => (
+                <LoadIngredient key={index} ingredient={name} />
+              ))}
+            </HStack>
 
             <HStack mt="43px">
               <Heading fontSize={"32px"} fontWeight="400" color={"#82F3FF"}>
                 R$ {price.toString().replace(".", ",")}
               </Heading>
 
-              <Flex
-                alignItems={"center"}
-                gap="5px"
-                pl={"54px"}
-                pr="27px"
-                fontSize="20px"
-              >
-                <ButtonText _hover={{ bgColor: "#c4c4cc5e" }} fontSize="20px">
-                  -
-                </ButtonText>
-                <Text>{quantity}</Text>
-                <ButtonText _hover={{ bgColor: "#c4c4cc5e" }} fontSize="20px">
-                  +
-                </ButtonText>
-              </Flex>
+              {data.user?.role !== "admin" ? (
+                <>
+                  <Flex
+                    alignItems={"center"}
+                    gap="5px"
+                    pl={"54px"}
+                    pr="27px"
+                    fontSize="20px"
+                  >
+                    <ButtonText
+                      _hover={{ bgColor: "#c4c4cc5e" }}
+                      fontSize="20px"
+                    >
+                      -
+                    </ButtonText>
+                    <Text>{quantity}</Text>
+                    <ButtonText
+                      _hover={{ bgColor: "#c4c4cc5e" }}
+                      fontSize="20px"
+                    >
+                      +
+                    </ButtonText>
+                  </Flex>
 
-              <ButtonPrimary>incluir</ButtonPrimary>
+                  <ButtonPrimary>incluir</ButtonPrimary>
+                </>
+              ) : (
+                <>
+                  <ButtonPrimary>Excluir</ButtonPrimary>
+                  <ButtonPrimary>Alterar</ButtonPrimary>
+                </>
+              )}
             </HStack>
           </Flex>
         </HStack>
