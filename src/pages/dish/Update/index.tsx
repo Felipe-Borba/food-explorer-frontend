@@ -39,7 +39,7 @@ export default function DishUpdate() {
 
   async function handleClick() {
     try {
-      const response = await api.patch(`/dish/${id}`, {
+      await api.patch(`/dish/${id}`, {
         nome,
         ingredientes,
         preco: Number(preco),
@@ -55,7 +55,7 @@ export default function DishUpdate() {
         });
       }
 
-      navigate(-1);
+      navigate(-2);
     } catch (error) {
       const err = apiErrorParser(error, "não foi possível cadastrar um prato");
       alert(err.message?.join("\n"));
