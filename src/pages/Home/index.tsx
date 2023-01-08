@@ -5,10 +5,14 @@ import { MainLayout } from "../../components/layouts/MainLayout";
 import { useAuth } from "../../context/Auth";
 import { Hero } from "./Hero";
 import { ScrollHorizontal } from "./ScrollHorizontal";
+import { useDish } from "../../context/Dish";
 
 export default function Home() {
   const { data } = useAuth();
   const navigate = useNavigate();
+  const {
+    data: { bebida, principal, sobremesa },
+  } = useDish();
 
   return (
     <MainLayout>
@@ -25,21 +29,21 @@ export default function Home() {
           <Heading fontWeight="500" fontFamily="Poppins" mb="39px">
             Pratos principais
           </Heading>
-          <ScrollHorizontal type="principal" />
+          <ScrollHorizontal data={principal} />
         </Box>
 
         <Box>
           <Heading fontWeight="500" fontFamily="Poppins" mb="39px">
             Sobremesas
           </Heading>
-          <ScrollHorizontal type="sobremesa" />
+          <ScrollHorizontal data={sobremesa} />
         </Box>
 
         <Box>
           <Heading fontWeight="500" fontFamily="Poppins" mb="39px">
             Bebidas
           </Heading>
-          <ScrollHorizontal type="bebida" />
+          <ScrollHorizontal data={bebida} />
         </Box>
 
         {data.user?.role === "admin" && (

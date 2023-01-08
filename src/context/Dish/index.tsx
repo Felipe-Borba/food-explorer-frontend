@@ -1,6 +1,6 @@
 import { PropsWithChildren, createContext, useContext, useState } from "react";
 import { api } from "../../services/api";
-import { DishContext, DishType } from "./types";
+import { DishContext, DishType, Dish } from "./types";
 
 const DishCtx = createContext<DishContext | null>(null);
 
@@ -15,21 +15,28 @@ export function useDish() {
 }
 
 export function DishProvider({ children }: PropsWithChildren) {
-  const [filter, setFilter] = useState(); //TODO
+  const [principal, setPrincipal] = useState<Dish[]>([]);
+  const [sobremesa, setSobremesa] = useState<Dish[]>([]);
+  const [bebida, setBebida] = useState<Dish[]>([]);
 
-  async function getDishList(type: DishType) {
+  async function refreshList({ filter = "" }) {
     try {
-      const response = await api.get("/dish", { params: { type } });
+      const response = await api.get("/dish", { params: { filter } });
+      const dishes = response.data.dishes as Dish[];
 
-      return response.data.dishes;
+      setPrincipal(dishes.filter((dish) => dish.type === "principal"));
+      setSobremesa(dishes.filter((dish) => dish.type === "sobremesa"));
+      setBebida(dishes.filter((dish) => dish.type === "bebida"));
     } catch (error) {
       console.log(error);
-
-      return [];
     }
   }
 
   return (
-    <DishCtx.Provider value={{ getDishList }}>{children}</DishCtx.Provider>
+    <DishCtx.Provider
+      value={{ data: { bebida, principal, sobremesa }, refreshList }}
+    >
+      {children}
+    </DishCtx.Provider>
   );
 }

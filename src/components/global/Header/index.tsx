@@ -1,5 +1,5 @@
 import { Flex, HStack, Heading, IconButton, Image } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/Auth";
 import { InputPrimary } from "../InputPrimary";
@@ -9,8 +9,10 @@ import { IconSearch } from "../../icons/IconSearch";
 import { IconInvoice } from "../../icons/IconInvoice";
 import { IconMain } from "../../icons/IconMain";
 import { ButtonText } from "../butons/ButtonText";
+import { useDish } from "../../../context/Dish";
 
 export function Header() {
+  const { refreshList } = useDish();
   const navigate = useNavigate();
   const { signOut } = useAuth();
   const [search, setSearch] = useState("");
@@ -20,6 +22,10 @@ export function Header() {
     signOut();
     navigate("/sign-in");
   }
+
+  useEffect(() => {
+    refreshList({ filter: search });
+  }, [search]);
 
   return (
     <HStack spacing="32px" px="123px" py="24px" bgColor="#00111A">

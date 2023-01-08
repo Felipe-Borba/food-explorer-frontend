@@ -7,12 +7,9 @@ import { Dish, DishType } from "../../context/Dish/types";
 import { DishCard } from "./DishCard";
 
 interface Props {
-  type: DishType;
+  data: Dish[];
 }
-export function ScrollHorizontal({ type }: Props) {
-  const { getDishList } = useDish();
-  const [data, setData] = useState<Dish[]>([]);
-
+export function ScrollHorizontal({ data }: Props) {
   const slideLeft = () => {
     var slider = document.getElementById("slider");
     if (!slider) return;
@@ -24,15 +21,6 @@ export function ScrollHorizontal({ type }: Props) {
     if (!slider) return;
     slider.scrollLeft = slider.scrollLeft + 500;
   };
-
-  useEffect(() => {
-    async function fetch() {
-      const data = await getDishList(type);
-      setData(data);
-    }
-
-    fetch();
-  }, []);
 
   if (!data.length) {
     return (

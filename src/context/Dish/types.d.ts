@@ -9,13 +9,13 @@ export interface Dish {
   updated_at: string;
 }
 
-export interface DishData {
-  dish: Dish | null;
-  dishList: Dish[];
-}
-
 export type DishType = "principal" | "sobremesa" | "bebida";
 
 export interface DishContext {
-  getDishList(type: DishType): Promise<DishList[]>;
+  data: {
+    principal: Dish[];
+    sobremesa: Dish[];
+    bebida: Dish[];
+  };
+  refreshList({ filter: string }): Promise<void>;
 }
